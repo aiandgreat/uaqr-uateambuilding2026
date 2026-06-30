@@ -45,6 +45,7 @@ const whitelist = [
   'https://techkadaqr.vercel.app',
   'https://techkadaqr.vercel.app/userPage.html',
   'https://techkadaqr.vercel.app/adminPage.html',
+  'https://uaqr-uateambuilding2026.vercel.app',
   'http://127.0.0.1:5500',
   'http://localhost:3000',
 ];

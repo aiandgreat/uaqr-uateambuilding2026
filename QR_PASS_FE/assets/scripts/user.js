@@ -13,7 +13,7 @@ document.querySelectorAll('.tab').forEach(tab => {
 
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:4000/api'
-  : '/api'; // Change '/api' to your production backend URL if deploying frontend and backend separately
+  : 'https://uaqr-uateambuilding2026.vercel.app/api';
 let originalStudentId = '';
 
 // --- Cookie Utilities ---
