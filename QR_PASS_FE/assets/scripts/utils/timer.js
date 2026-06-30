@@ -1,5 +1,7 @@
-// Month is 0-indexed (0=Jan), so Jan 21 2026 is (2026, 0, 21)
-const eventDate = new Date(2026, 0, 21, 8, 0, 0); 
+// Month is 0-indexed (0=Jan, 6=Jul), so July 3, 2026 is (2026, 6, 3)
+// UA Team Building 2026 — July 3, 2026, 8:00 AM
+const eventDate = new Date(2026, 6, 3, 8, 0, 0); 
+
 
 const countdown = setInterval(function() {
     const now = new Date().getTime();

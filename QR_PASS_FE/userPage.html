@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Techkada 2026 - Student Portal</title>
+    <title>UA Team Building 2026 - Faculty Portal</title>
+    <meta name="description" content="Register and generate your QR entry pass for UA Team Building 2026.">
 
     <!-- WEBSITE LOGO/FAVICON -->
-    <link rel="icon" type="image/png" href="./assets/images/cei2026f.png" />
+    <link rel="icon" type="image/png" href="./assets/images/UA-LOGO.png" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
@@ -20,13 +21,17 @@
     <link rel="stylesheet" href="assets/css/blobAnimation.css">
 </head>
 <body>
-<nav class="nav">
-        <a href="./index.html"><img src="./assets/images/citlogo.png" alt="CIT Logo" class="nav-logo"></a>
-        
-        <a href="./index.html"><img src="./assets/images/UA-LOGO.png" alt="University of the Assumption Logo" class="nav-logo"></a>
 
-        <a href="./index.html"><img src="./assets/images/sssitelogo.jpg" alt="SSITE Logo" class="nav-logo"></a>
-    </nav>
+    <!-- ===== NAVIGATION: Powered by CIT & SSITE ===== -->
+    <div class="nav-wrapper">
+        <div class="nav-powered-bar">
+            <span class="nav-powered-label">Powered by</span>
+            <nav class="nav">
+                <a href="./index.html"><img src="./assets/images/citlogo.png" alt="CIT Logo" class="nav-logo--cit"></a>
+                <a href="./index.html"><img src="./assets/images/ssitelogo.png" alt="SSITE Logo" class="nav-logo--ssite"></a>
+            </nav>
+        </div>
+    </div>
 
     <div class="blob-outer-container">
         <div class="blob-inner-container">
@@ -35,7 +40,7 @@
     </div>
 
     <main class="main-container">
-        <h1 class="title">Techkada 2026 Registration</h1>
+        <h1 class="title">UA Team Building 2026 — Registration</h1>
     
         <div class="tabs">
             <div class="tab active" data-tab="register">
@@ -50,8 +55,8 @@
             <div class="registration-form">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="studentId">UA Student ID</label>
-                        <input type="number" id="studentId" placeholder="Enter UA Student ID">
+                        <label for="studentId">UA ID</label>
+                        <input type="number" id="studentId" placeholder="Enter UA ID">
                     </div>
                     <div class="form-group">
                         <label for="studentName">Full Name <span>(e.g., Juan Dela Cruz)</span></label>
@@ -60,34 +65,34 @@
                 </div>
     
                 <div class="form-group">
-                    <label for="registerCourse">Year and Section</label>
+                    <label for="registerCourse">Department</label>
                     <select id="registerCourse" class="course-select"></select>
-                    <p class="form-group-note">Note: If you don't see any year level, please wait or refresh the page.</p>
+                    <p class="form-group-note">Note: If you don't see any department, please wait or refresh the page.</p>
                 </div>
     
-                <button id="registerBtn" class="encrypt-btn">Register Student</button>
+                <button id="registerBtn" class="encrypt-btn">Register</button>
                 <div id="registrationStatus" class="hidden"></div>
             </div>
         </div>
         
         <div id="generate" class="tab-content">
             <div class="form-group">
-                <label for="qrStudentId">UA Student ID</label>
-                <input type="text" id="qrStudentId" placeholder="Enter UA Student ID">
+                <label for="qrStudentId">UA ID</label>
+                <input type="text" id="qrStudentId" placeholder="Enter UA ID">
             </div>
     
             <div class="form-group">
-                <label for="qrCourse">Year and Section</label>
+                <label for="qrCourse">Department</label>
                 <select id="qrCourse" class="course-select"></select>
             </div>
     
             <button id="generateQrBtn" class="encrypt-btn">Generate QR Pass</button>
     
-            <hr style="margin-block: 1.5rem; border: 0; border-top: 1px solid rgba(255,255,255,0.1);">
+            <hr style="margin-block: 1.5rem; border: 0; border-top: 1px solid rgba(26, 58, 110, 0.1);">
     
             <div id="qrCodeContainer" class="hidden">
                 <div class="qr-border">
-                    <h3 style="margin-bottom: 10px; font-family: 'Playfair Display', serif;">TECHKADA 2026</h3>
+                    <h3 style="margin-bottom: 10px; font-family: 'Playfair Display', serif; color: #1A3A6E;">UA TEAM BUILDING 2026</h3>
                     <canvas id="qrCodeCanvas"></canvas>
                     <div class="qr-actions">
                         <button id="downloadBtn" class="download-qr-btn">
@@ -95,24 +100,24 @@
                         </button>
                     </div>
                 </div>
-                <p style="margin-top: 10px; font-size: 0.8rem; color: #B0B0B0;">Present this QR code at the Msgr. Serrano Auditorium for verification.</p>
+                <p style="margin-top: 10px; font-size: 0.8rem; color: #888;">Present this QR code at Hacienda Gracia for verification.</p>
             </div>
         </div>
         
         <div id="verificationModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Verify Student ID</h2>
+                    <h2>Verify UA ID</h2>
                     <button class="close-modal">&times;</button>
                 </div>
-                <p>Please re-enter your Student ID to confirm:</p>
-                <input type="number" id="verifyStudentId" placeholder="Enter student ID again">
-                <p class="verification-modal-subtext" style="font-size: 11px; color: #ff6b6b; margin-top: 10px; font-weight: 600;">
-                    You Can Only Register Once! Please ensure your Student ID is correct.
+                <p style="color: #5A5A7A; margin-bottom: 1rem;">Please re-enter your UA ID to confirm:</p>
+                <input type="number" id="verifyStudentId" placeholder="Enter UA ID again">
+                <p class="verification-modal-subtext" style="font-size: 11px; color: #C41E3A; margin-top: 10px; font-weight: 600;">
+                    You Can Only Register Once! Please ensure your UA ID is correct.
                 </p>
                 <div class="modal-actions" style="margin-top: 20px; display: flex; gap: 10px;">
                     <button id="confirmVerifyBtn" class="encrypt-btn">Confirm</button>
-                    <button id="cancelVerifyBtn" class="encrypt-btn" style="background-color: #C41E3A; color: white;">Cancel</button>
+                    <button id="cancelVerifyBtn" class="encrypt-btn" style="background: #C41E3A; color: white;">Cancel</button>
                 </div>
             </div>
         </div>

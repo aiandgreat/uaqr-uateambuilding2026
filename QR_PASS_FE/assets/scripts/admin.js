@@ -1,7 +1,7 @@
 import alertPopup from "./utils/alert.js";
 
-// const API_BASE_URL = 'http://localhost:4000/api';
-const API_BASE_URL = 'https://qrregis.onrender.com/api';
+const API_BASE_URL = 'http://localhost:4000/api';
+// const API_BASE_URL = 'https://qrregis.onrender.com/api';
 
 let adminToken = null;
 let currentEditingCourseId = null;
@@ -106,7 +106,7 @@ async function loadAdminCourses() {
             
             if (data.courses.length === 0) {
                 const row = document.createElement('tr');
-                row.innerHTML = '<td colspan="3" class="no-records">No year level & sections found</td>';
+                row.innerHTML = '<td colspan="3" class="no-records">No departments found</td>';
                 tbody.appendChild(row);
                 return;
             }
@@ -126,10 +126,10 @@ async function loadAdminCourses() {
                     <td>${new Date(course.createdAt).toLocaleDateString()}</td>
                     <td>
                         <div class="action-buttons">
-                            <button class="icon-btn edit-btn" data-id="${course.id}" data-name="${course.name}" data-key="${course.encryptionKey}" title="Edit Year Level & Section">
+                            <button class="icon-btn edit-btn" data-id="${course.id}" data-name="${course.name}" data-key="${course.encryptionKey}" title="Edit Department">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
-                            <button class="icon-btn delete-btn" data-id="${course.id}" data-name="${course.name}" title="Delete Year Level & Section">
+                            <button class="icon-btn delete-btn" data-id="${course.id}" data-name="${course.name}" title="Delete Department">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>
@@ -146,11 +146,11 @@ async function loadAdminCourses() {
                 btn.addEventListener('click', confirmDeleteCourse);
             });
         } else {
-            throw new Error(data.error || 'Failed to load courses');
+            throw new Error(data.error || 'Failed to load departments');
         }
     } catch (error) {
-        console.error('Load year level & sections error:', error);
-        showStatusMessage('courseStatus', 'Failed to load year level & sections', false);
+        console.error('Load departments error:', error);
+        showStatusMessage('courseStatus', 'Failed to load departments', false);
     }
 }
 
@@ -247,7 +247,7 @@ document.getElementById('addCourseBtn').addEventListener('click', async () => {
     const key = document.getElementById('courseKey').value.trim();
     
     if (!name || !key) {
-        showStatusMessage('courseStatus', 'Both year level & section and encryption key are required', false);
+        showStatusMessage('courseStatus', 'Both department and encryption key are required', false);
         return;
     }
     
@@ -353,7 +353,7 @@ document.getElementById('saveCourseBtn').addEventListener('click', async () => {
     const key = document.getElementById('editCourseKey').value.trim();
     
     if (!name || !key) {
-        showStatusMessage('courseStatus', 'Both course name and encryption key are required', false);
+        showStatusMessage('courseStatus', 'Both department name and encryption key are required', false);
         return;
     }
     
@@ -410,7 +410,7 @@ function showDeleteCourseModal(e) {
             currentDeletingCourseId = courseId;
             currentDeletingCourseName = courseName;
             const message = document.getElementById('deleteCourseMessage');
-            message.textContent = `Are you sure you want to delete the course "${courseName}"?`;
+            message.textContent = `Are you sure you want to delete the department "${courseName}"?`;
             document.getElementById('deleteCourseStatus').classList.add('hidden');
             
             const modal = document.getElementById('deleteCourseModal');
@@ -702,7 +702,7 @@ async function verifyQRCode(encryptedData) {
     const course = document.getElementById('verifyCourse').value;
     
     if (!course) {
-        alertPopup('Please select a year level & section');
+        alertPopup('Please select a department');
         return;
     }
     
@@ -741,9 +741,9 @@ async function verifyQRCode(encryptedData) {
             const studentInfo = document.createElement('div');
             studentInfo.className = 'student-info';
             studentInfo.innerHTML = `
-                <p><strong>Student ID:</strong> ${data.student.studentId}</p>
+                <p><strong>UA ID:</strong> ${data.student.studentId}</p>
                 <p><strong>Name:</strong> ${data.student.name}</p>
-                <p><strong>Year Level & Section:</strong> ${data.student.course}</p>
+                <p><strong>Department:</strong> ${data.student.course}</p>
             `;
             resultDiv.appendChild(studentInfo);
             
@@ -778,7 +778,7 @@ async function verifyQRCode(encryptedData) {
             <div class="verification-help">
                 <p><strong>Possible solutions:</strong></p>
                 <ul>
-                    <li>Ensure you selected the correct year level & section</li>
+                    <li>Ensure you selected the correct department</li>
                     <li>Check that the encryption key is correct</li>
                     <li>Make sure the QR code hasn't been tampered with</li>
                     <li>Try scanning again in better lighting conditions</li>
@@ -799,7 +799,7 @@ async function verifyQRCode(encryptedData) {
 function startScanner() {
     const course = document.getElementById('verifyCourse').value;
     if (!course) {
-        alertPopup('Please select the year level & section first');
+        alertPopup('Please select the department first');
         return;
     }
     
@@ -916,7 +916,7 @@ document.getElementById('clearAttendanceBtn').addEventListener('click', () => {
         message = 'Are you sure you want to clear attendance records for ';
         if (date) message += `date: ${date}`;
         if (date && course) message += ' and ';
-        if (course) message += `course: ${course}`;
+        if (course) message += `department: ${course}`;
         message += '?';
     }
     
@@ -1022,7 +1022,7 @@ document.getElementById('clearAttendanceBtn').addEventListener('click', () => {
         message = 'Are you sure you want to clear attendance records for ';
         if (date) message += `date: ${date}`;
         if (date && course) message += ' and ';
-        if (course) message += `course: ${course}`;
+        if (course) message += `department: ${course}`;
         message += '?';
     }
     

@@ -5,8 +5,8 @@
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(5px);
+    background-color: rgba(26, 26, 46, 0.65);
+    backdrop-filter: blur(8px);
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -20,37 +20,42 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    background-color: #2A2725;
+    background-color: #FFFFFF;
     padding: 30px 40px;
-    border-radius: 10px;
+    border-radius: 16px;
     width: 300px;
     animation: popup-animation 0.5s ease-out;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
-    border: 1px solid #47382c;
+    box-shadow: 0px 20px 60px rgba(26, 58, 110, 0.2);
+    border: 1.5px solid rgba(196, 30, 58, 0.15);
 }
 
 .custom-alert .alert-content > span {
     text-align: center;
     font-size: 16px;
-    color: #FFFFFF;
+    color: #1A1A2E;
+    font-weight: 500;
 }
 
 .custom-alert #alertCloseButton {
-    margin-top: 20px;
-    width: 100px;
+    margin-top: 10px;
+    width: 120px;
     padding: 10px 0;
     cursor: pointer;
     border: none;
-    background-color: #fff;
-    color: #000;
+    background: linear-gradient(135deg, #C41E3A 0%, #9e1830 100%);
+    color: #FFFFFF;
     font-weight: 700;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
 }
 
 .custom-alert #alertCloseButton:hover {
-    opacity: 0.8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(196, 30, 58, 0.45);
 }
+
 
 /* Tablet View (768px to 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {

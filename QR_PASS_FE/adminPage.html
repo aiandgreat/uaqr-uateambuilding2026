@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Techkada 2026 - Admin Dashboard</title>
+    <title>UA Team Building 2026 - Admin Dashboard</title>
+    <meta name="description" content="Admin Dashboard for UA Team Building 2026 QR Attendance System.">
 
-    <link rel="icon" type="image/png" href="./assets/images/cei2026f.png" />
+    <link rel="icon" type="image/png" href="./assets/images/UA-LOGO.png" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
@@ -19,13 +20,24 @@
 </head>
 <body>
     
+    <!-- ===== NAVIGATION: Powered by CIT & SSITE ===== -->
+    <div class="nav-wrapper">
+        <div class="nav-powered-bar">
+            <span class="nav-powered-label">Powered by</span>
+            <nav class="nav">
+                <a href="./index.html"><img src="./assets/images/citlogo.png" alt="CIT Logo" class="nav-logo--cit"></a>
+                <a href="./index.html"><img src="./assets/images/ssitelogo.png" alt="SSITE Logo" class="nav-logo--ssite"></a>
+            </nav>
+        </div>
+    </div>
+
     <div class="blob-outer-container">
         <div class="blob-inner-container"><div class="blob"></div></div>
     </div>
 
     <div id="adminLogin" class="login-main-container">
         <div class="login-container">
-            <img src="./assets/images/cei2026f.png" alt="Creare et Innovare 2026" style="height: 80px; width: auto; margin-bottom: 1rem; align-self: center;">
+            <img src="./assets/images/UA-LOGO.png" alt="University of the Assumption" style="height: 90px; width: auto; margin-bottom: 0.5rem; align-self: center;">
             <h2 class="login-title">Admin Access</h2>
             
             <div class="form-group">
@@ -53,10 +65,11 @@
     <div id="adminDashboard" class="container hidden">
         <div class="admin-header">
             <div class="header-title">
-                <a href="./index.html">
-                    <img src="./assets/images/cei2026f.png" alt="Logo" class="nav-logo">
+                <a href="./index.html" style="display:flex;align-items:center;gap:10px;">
+                    <img src="./assets/images/citlogo.png" alt="CIT Logo" style="height:42px;width:auto;">
+                    <img src="./assets/images/ssitelogo.png" alt="SSITE Logo" style="height:28px;width:auto;">
                 </a>
-                <h1>Research Forum Admin</h1>
+                <h1>UA Team Building 2026 — Admin</h1>
             </div>
             <button id="logoutBtn" class="logout-btn">
                 <i class="fa-solid fa-right-from-bracket"></i>
@@ -66,7 +79,7 @@
 
         <div class="tabs">
             <div class="tab active" data-tab="course-management">
-                <i class="fa-solid fa-graduation-cap"></i> Year & Section
+                <i class="fa-solid fa-graduation-cap"></i> Departments
             </div>
             <div class="tab" data-tab="attendance-records">
                 <i class="fa-solid fa-clipboard-list"></i> Attendance Records
@@ -78,11 +91,11 @@
         
         <div id="course-management" class="tab-content active">
             <div class="management-section">
-                <h2 class="section-title">Manage Sections</h2>
+                <h2 class="section-title">Manage Departments</h2>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="courseName">Year Level & Section</label>
-                        <input type="text" id="courseName" placeholder="e.g., BSIT 4-A">
+                        <label for="courseName">Department</label>
+                        <input type="text" id="courseName" placeholder="e.g., College of Information Technology">
                     </div>
                     <div class="form-group">
                         <label for="courseKey">Encryption Key</label>
@@ -95,7 +108,7 @@
                     </div>
                 </div>
                 <div class="action-buttons">
-                    <button id="addCourseBtn" class="primary-btn"><i class="fa-solid fa-plus"></i> Add Section</button>
+                    <button id="addCourseBtn" class="primary-btn"><i class="fa-solid fa-plus"></i> Add Department</button>
                     <button id="updateCourseBtn" class="success-btn hidden">Update</button>
                     <button id="cancelUpdateBtn" class="danger-btn hidden">Cancel</button>
                 </div>
@@ -130,9 +143,9 @@
                         <input type="date" id="filterDate">
                     </div>
                     <div class="form-group">
-                        <label for="filterCourse">Filter by Section</label>
+                        <label for="filterCourse">Filter by Department</label>
                         <select id="filterCourse">
-                            <option value="">All Sections</option>
+                            <option value="">All Departments</option>
                         </select>
                     </div>
                 </div>
@@ -150,9 +163,9 @@
                     <table id="attendanceTable">
                         <thead>
                             <tr>
-                                <th>Student ID</th>
+                                <th>UA ID</th>
                                 <th>Name</th>
-                                <th>Section</th>
+                                <th>Department</th>
                                 <th>Time In</th>
                                 <th>Time Out</th>
                                 <th>Date</th>
@@ -171,9 +184,9 @@
 
         <div id="verify" class="tab-content">
             <div class="form-group">
-                <label for="verifyCourse">Target Section</label>
+                <label for="verifyCourse">Target Department</label>
                 <select id="verifyCourse">
-                    <option value="">Select Section to Verify...</option>
+                    <option value="">Select Department to Verify...</option>
                 </select>
             </div>
             

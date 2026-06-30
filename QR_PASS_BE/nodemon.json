@@ -1,0 +1,3 @@
+{
+  "exec": "node --openssl-legacy-provider index.js"
+}

@@ -10,13 +10,22 @@
 }
 
 :root {
+    /* UA Brand Colors */
+    --ua-red: #C41E3A;
+    --ua-blue: #1A3A6E;
+    --ua-yellow: #F5C000;
+
+    /* Aliases */
     --primary-red: #C41E3A;
-    --primary-purple: #4B3B7A;
-    --dark-purple: #2D1F4C;
-    --accent-purple: #6C5B95;
-    --accent-gray: #EBEBEB;
+    --primary-blue: #1A3A6E;
+    --accent-yellow: #F5C000;
+    --accent-gray: #F0F0F0;
+
+    /* Text */
+    --text-dark: #1A1A2E;
     --text-white: #FFFFFF;
-    --text-light-gray: #B0B0B0;
+    --text-muted: #5A5A7A;
+
     --font-main: "Open Sans", sans-serif;
     --font-heading: "Inter", sans-serif;
 }
@@ -24,8 +33,8 @@
 body {
     font-family: var(--font-main);
     margin-inline: 5%;
-    color: var(--text-white);
-    background-color: var(--dark-purple);
+    color: var(--text-dark);
+    background-color: #FFFFFF;
     line-height: 1.6;
 }
 
@@ -39,14 +48,24 @@ a:hover {
     opacity: 0.8;
 }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION WRAPPER --- */
+.nav-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    padding-block: 1rem;
+}
+
+/* Logo row — single horizontal line */
 .nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-block: 1.5rem;
-    gap: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 1.75rem;
+    background: transparent;
+    border-bottom: none;
+    padding: 0;
 }
 
 .nav a {
@@ -57,12 +76,56 @@ a:hover {
     font-size: 0.9rem;
 }
 
-/* Logo Styling within Nav */
-.nav-logo {
-    height: 60px; /* Fixed height for consistency */
+/* "Powered by" inline label */
+.nav-powered-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-powered-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #999;
+    font-family: var(--font-heading);
+    white-space: nowrap;
+    /* thin right separator */
+    padding-right: 1.25rem;
+    border-right: 1.5px solid rgba(196, 30, 58, 0.18);
+}
+
+/* CIT logo — larger */
+.nav-logo--cit {
+    height: 90px;
     width: auto;
     transition: transform 0.3s ease;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12));
+}
+
+.nav-logo--cit:hover {
+    transform: scale(1.05);
+}
+
+/* SSITE logo — smaller */
+.nav-logo--ssite {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.nav-logo--ssite:hover {
+    transform: scale(1.05);
+}
+
+/* Generic fallback */
+.nav-logo {
+    height: 55px;
+    width: auto;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
 }
 
 .nav-logo:hover {
@@ -79,7 +142,7 @@ a:hover {
 .heading-title {
     font-family: "Playfair Display", serif;
     font-size: 2.5rem;
-    color: var(--text-white);
+    color: var(--text-dark);
     text-align: center;
     margin-bottom: 1rem;
 }
@@ -88,14 +151,14 @@ a:hover {
 .attendance-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: var(--primary-purple);
+    background-color: #fff;
     margin-top: 2rem;
     border-radius: 8px;
     overflow: hidden;
 }
 
 .attendance-table th {
-    background-color: var(--primary-red);
+    background-color: var(--ua-red);
     color: var(--text-white);
     padding: 12px;
     text-align: left;
@@ -104,15 +167,17 @@ a:hover {
 
 .attendance-table td {
     padding: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(26, 58, 110, 0.1);
+    color: var(--text-dark);
 }
 
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
-    .nav-logo {
-        height: 45px;
-    }
-    
+    .nav-logo--cit { height: 65px; }
+    .nav-logo--ssite { height: 30px; }
+    .nav-logo { height: 40px; }
+    .nav-powered-label { font-size: 0.55rem; letter-spacing: 1.5px; padding-right: 0.75rem; }
+
     .heading-title {
         font-size: 1.8rem;
     }

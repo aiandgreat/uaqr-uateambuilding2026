@@ -1,4 +1,4 @@
-/* Blob Animations (Animated Background) */ 
+/* Blob Animations (Animated Background) - UA Team Building 2026 Colors */ 
 .blob-outer-container {
     position: fixed;
     height: 100vh;
@@ -7,7 +7,7 @@
     inset: 0;
     margin: auto;
     filter: blur(100px);
-    opacity: 0.3;
+    opacity: 0.08;
 }
 
 .blob-inner-container {
@@ -29,8 +29,9 @@
     height: 100vh;
     inset: 0;
     margin: auto;
-    background: conic-gradient(from 0deg, #dfa63d, #90d8eb,#dfa63d);
-    animation: spinBlob 8s linear infinite;
+    /* UA Colors: Red, Yellow, Blue */
+    background: conic-gradient(from 0deg, #C41E3A, #F5C000, #1A3A6E, #C41E3A);
+    animation: spinBlob 10s linear infinite;
 }
 
 @keyframes spinBlob {

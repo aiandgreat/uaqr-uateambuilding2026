@@ -7,7 +7,8 @@ const connectDB = async () => {
       dbName: process.env.DB_NAME,
       serverSelectionTimeoutMS: 5000,
       maxPoolSize: 10,
-      socketTimeoutMS: 45000
+      socketTimeoutMS: 45000,
+      family: 4, // Force IPv4 to avoid TLS issues on Windows with IPv6
     });
     console.log('MongoDB connected successfully');
   } catch (error) {

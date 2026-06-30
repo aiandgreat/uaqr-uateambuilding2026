@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Techkada 2026</title>
+    <title>UA Team Building 2026</title>
+    <meta name="description" content="UA Team Building 2026 — QR Pass Registration System. July 3, 2026 at Hacienda Gracia, Lubao, Pampanga.">
 
     <!-- WEBSITE LOGO/FAVICON -->
-    <link rel="icon" type="image/png" href="./assets/images/cei2026f.png" />
+    <link rel="icon" type="image/png" href="./assets/images/UA-LOGO.png" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
     
@@ -21,16 +22,16 @@
 </head>
 <body>
 
-    <nav class="nav">
-         <!-- LEFT: CIT Logo -->
-         <img src="./assets/images/citlogo.png" alt="CIT Logo" class="nav-logo">
-         
-         <!-- MIDDLE: UA Logo -->
-         <img src="./assets/images/UA-LOGO.png" alt="University of the Assumption Logo" class="nav-logo">
-         
-         <!-- RIGHT: SSITE Logo -->
-         <img src="./assets/images/sssitelogo.jpg" alt="SSITE Logo" class="nav-logo">
-    </nav>
+    <!-- ===== NAVIGATION: Powered by CIT & SSITE ===== -->
+    <div class="nav-wrapper">
+        <div class="nav-powered-bar">
+            <span class="nav-powered-label">Powered by</span>
+            <nav class="nav">
+                <img src="./assets/images/citlogo.png" alt="CIT - College of Information Technology Logo" class="nav-logo--cit">
+                <img src="./assets/images/ssitelogo.png" alt="SSITE Logo" class="nav-logo--ssite">
+            </nav>
+        </div>
+    </div>
 
     <div class="blob-outer-container">
         <div class="blob-inner-container">
@@ -39,8 +40,9 @@
     </div>
 
     <section class="hero-container">
+        <!-- Countdown Timer -->
         <div class="countdown-container">
-            <p class="countdown-subtitle">Research Forum</p>
+            <p class="countdown-subtitle">UA Team Building 2026</p>
             <div class="countdown-timer">
                 <div class="countdown-item">
                     <div class="countdown-number" id="days">00</div>
@@ -61,13 +63,19 @@
             </div>
         </div>
         
-        <img src="./assets/images/cei2026f.png" alt="Techkada 2026" class="event-logo">
-        
-        <p class="hero-container-subtext">𝐁𝐞𝐲𝐨𝐧𝐝 𝐭𝐡𝐞 𝐂𝐨𝐝𝐞 — 𝐃𝐞𝐯𝐞𝐥𝐨𝐩. 𝐃𝐞𝐩𝐥𝐨𝐲. 𝐃𝐨𝐦𝐢𝐧𝐚𝐭𝐞.</p>
-        
-        <p style="margin-top: 1.5rem; color: #EBEBEB; font-size: 0.9rem; letter-spacing: 1px;">
-            <i class="fa-solid fa-calendar-day" style="color: #C41E3A;"></i> May 25, 2026 | May 29, 2026
-            <i class="fa-solid fa-location-dot" style="color: #C41E3A;"></i> Multi-purpose Hall | Msgr. Serrano Auditorium
+        <!-- UA Logo as Event Logo -->
+        <img src="./assets/images/UA-LOGO.png" alt="University of the Assumption" class="event-logo">
+
+        <!-- Event Name -->
+        <h1 class="event-name">UA Team Building 2026</h1>
+
+        <!-- UA Color Divider -->
+        <div class="ua-divider"></div>
+
+        <!-- Event Info -->
+        <p class="event-info-line">
+            <span><i class="fa-solid fa-calendar-day"></i> July 3, 2026 (Friday) &nbsp;|&nbsp; 8:00 AM – 4:00 PM</span>
+            <span><i class="fa-solid fa-location-dot"></i> Hacienda Gracia, Lubao, Pampanga</span>
         </p>
     </section>
 
@@ -75,14 +83,14 @@
         <div class="cards">
             <a class="card" href="./userPage.html">
                 <i class="fa-solid fa-qrcode"></i>
-                <h3>Student Portal</h3>
-                <p>Register and generate your unique QR entry pass.</p>
+                <h3>Faculty Portal</h3>
+                <p>Register and generate your unique QR entry pass for the UA Team Building 2026 event.</p>
             </a>
 
             <a class="card" href="./adminPage.html">
                 <i class="fa-solid fa-shield-halved"></i>
                 <h3>Admin Portal</h3>
-                <p>Verify participant entries and monitor real-time forum attendance.</p>
+                <p>Verify participant entries and monitor real-time attendance for the event.</p>
             </a>
         </div>
     </section>

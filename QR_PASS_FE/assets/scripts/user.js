@@ -11,7 +11,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     });
 });
 
-const API_BASE_URL = 'https://qrregis.onrender.com/api';
+const API_BASE_URL = 'http://localhost:4000/api';
 let originalStudentId = '';
 
 // --- Cookie Utilities ---
@@ -64,7 +64,7 @@ document.getElementById('registerBtn').addEventListener('click', () => {
     }
 
     if (studentId.length !== 10) {
-        alertPopup('Student ID must be exactly 10 characters long');
+        alertPopup('UA ID must be exactly 10 characters long');
         return;
     }
 
@@ -98,7 +98,7 @@ cancelVerifyBtn.addEventListener('click', hideVerificationModal);
 confirmVerifyBtn.addEventListener('click', () => {
     const verifiedStudentId = verifyStudentIdInput.value.trim();
     if (verifiedStudentId !== originalStudentId) {
-        alertPopup('Student ID does not match. Please try again.');
+        alertPopup('UA ID does not match. Please try again.');
         return;
     }
     hideVerificationModal();
@@ -138,7 +138,7 @@ async function proceedWithRegistration() {
         alertPopup('Registration failed. Please check your connection.');
     } finally {
         registerBtn.disabled = false;
-        registerBtn.textContent = 'Register Student';
+        registerBtn.textContent = 'Register';
     }
 }
 
@@ -148,12 +148,12 @@ async function generateStudentQR() {
     const course = document.getElementById('qrCourse').value;
     
     if (studentId.length !== 10) {
-        alertPopup('Student ID must be exactly 10 characters long');
+        alertPopup('UA ID must be exactly 10 characters long');
         return;
     }
 
     if (!studentId || !course) {
-        alertPopup('Please enter student ID and select year level & section');
+        alertPopup('Please enter UA ID and select department');
         return;
     }
     
@@ -173,7 +173,7 @@ async function generateStudentQR() {
         if (response.ok) {
             const canvas = document.getElementById('qrCodeCanvas');
             canvas.dataset.studentId = studentId;
-            canvas.dataset.studentName = data.studentName || 'student';
+            canvas.dataset.studentName = data.studentName || 'Faculty';
             
             const ctx = canvas.getContext('2d');
             canvas.width = 400;
@@ -183,18 +183,18 @@ async function generateStudentQR() {
             ctx.fillStyle = '#FFFFFF';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // 2. Header (Red gradient with purple accent)
-            ctx.fillStyle = '#C41E3A';
+            // 2. Header (Blue theme matching QR)
+            ctx.fillStyle = '#1A3A6E';
             ctx.fillRect(0, 0, canvas.width, 140);
             
             // 3. Header Text
             ctx.fillStyle = '#FFFFFF';
             ctx.textAlign = 'center';
-            ctx.font = 'bold 28px "Playfair Display", serif';
-            ctx.fillText('TECHKADA 2026', canvas.width/2, 70);
+            ctx.font = 'bold 24px "Playfair Display", serif';
+            ctx.fillText('UA TEAM BUILDING 2026', canvas.width/2, 70);
             ctx.fillStyle = '#EBEBEB';
             ctx.font = 'italic 12px "Open Sans", sans-serif';
-            ctx.fillText('Beyond the Code', canvas.width/2, 110);
+            ctx.fillText('Hacienda Gracia, Lubao, Pampanga', canvas.width/2, 110);
             
             // 4. Generate QR Code
             const qrSize = 250;
@@ -205,21 +205,21 @@ async function generateStudentQR() {
             await QRCode.toCanvas(tempCanvas, data.encryptedData, {
                 width: qrSize,
                 margin: 1,
-                color: { dark: '#C41E3A', light: '#FFFFFF' }
+                color: { dark: '#1A3A6E', light: '#FFFFFF' }
             });
             
             ctx.drawImage(tempCanvas, qrX, qrY);
             
             // QR Border
-            ctx.strokeStyle = '#C41E3A';
+            ctx.strokeStyle = '#1A3A6E';
             ctx.lineWidth = 2;
             ctx.strokeRect(qrX - 10, qrY - 10, qrSize + 20, qrSize + 20);
             
             // 5. Footer Details
             const footerY = 480;
-            ctx.fillStyle = '#C41E3A';
+            ctx.fillStyle = '#1A3A6E';
             ctx.font = 'bold 18px "Open Sans", sans-serif';
-            ctx.fillText((data.studentName || 'Student').toUpperCase(), canvas.width/2, footerY);
+            ctx.fillText((data.studentName || 'Faculty').toUpperCase(), canvas.width/2, footerY);
             ctx.font = '14px "Open Sans", sans-serif';
             ctx.fillStyle = '#555555';
             ctx.fillText(studentId, canvas.width/2, footerY + 25);
@@ -228,13 +228,13 @@ async function generateStudentQR() {
             ctx.beginPath();
             ctx.moveTo(100, footerY + 45);
             ctx.lineTo(300, footerY + 45);
-            ctx.strokeStyle = '#C41E3A';
+            ctx.strokeStyle = '#1A3A6E';
             ctx.stroke();
             
             // Event Info
-            ctx.fillStyle = '#4B3B7A';
+            ctx.fillStyle = '#C41E3A';
             ctx.font = 'bold 12px "Open Sans", sans-serif';
-            ctx.fillText('JANUARY 26, 2026 | JANUARY 29, 2026', canvas.width/2, footerY + 70);
+            ctx.fillText('JULY 3, 2026 | 8:00 AM - 4:00 PM', canvas.width/2, footerY + 70);
             ctx.font = '10px "Open Sans", sans-serif';
 
             document.getElementById('qrCodeContainer').classList.remove('hidden');
@@ -245,7 +245,7 @@ async function generateStudentQR() {
         alertPopup('Server error while generating QR.');
     } finally {
         generateBtn.disabled = false;
-        generateBtn.textContent = 'Generate Pass';
+        generateBtn.textContent = 'Generate QR Pass';
     }
 }
 
