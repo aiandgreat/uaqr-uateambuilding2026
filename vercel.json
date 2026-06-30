@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "QR_PASS_BE/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "QR_PASS_FE/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "QR_PASS_BE/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "QR_PASS_FE/$1"
+    }
+  ]
+}
