@@ -3,8 +3,18 @@ require('dotenv').config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      dbName: process.env.DB_NAME,
+    let mongoUri = process.env.MONGO_URI;
+    
+    if (!mongoUri) {
+      console.error('MongoDB connection error: MONGO_URI environment variable is not defined!');
+      return;
+    }
+    
+    // Strip leading/trailing quotes if they were pasted accidentally
+    mongoUri = mongoUri.replace(/^["']|["']$/g, '').trim();
+
+    await mongoose.connect(mongoUri, {
+      dbName: process.env.DB_NAME ? process.env.DB_NAME.replace(/^["']|["']$/g, '').trim() : undefined,
       serverSelectionTimeoutMS: 5000,
       maxPoolSize: 10,
       socketTimeoutMS: 45000,
@@ -13,7 +23,7 @@ const connectDB = async () => {
     console.log('MongoDB connected successfully');
   } catch (error) {
     console.error('MongoDB connection error:', error);
-    process.exit(1);
+    // Do not call process.exit(1) on serverless platforms, let mongoose throw/buffer
   }
 };
 
