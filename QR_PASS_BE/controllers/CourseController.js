@@ -96,12 +96,60 @@ exports.bulkCreateCourses = async (req, res) => {
     }
 };
 
+const DEPARTMENT_ORDER = [
+    "Office of the University President (UP)",
+    "Center for Holistic Advancement of Religious Instruction, Spirituality, and Ministry (CHARISM)",
+    "Marketing, Alumni Relations, Internationalization, and Engagement Office (MARIAE)",
+    "Quality Assurance, Monitoring, Planning, and Improvement Office (QAMPI)",
+    "Office of the Vice President for Administration (VPA)",
+    "Faculties, Auxiliary Services, and Transportation Office (FAST)",
+    "Human Resource Development Office (HRDO)",
+    "Medical and Dental Clinic (M/D)",
+    "Office of the Management Information Systems and Services (OMISS)",
+    "Office of the Vice President for Finance (VPF)",
+    "Accounting and Financial Management Services (AMFS)",
+    "Treasury and Resource Management Services (TRMS)",
+    "Office of the Vice President for Academic Affairs (VPAA)",
+    "GinhawUA Center and Admissions Office (GCAO)",
+    "Office of the Student Affairs (OSA)",
+    "Office of the University Registrar (OUR)",
+    "University Libraries and Archives",
+    "Research Ethics Board Office (REB)",
+    "Research and Extension Office (REO)",
+    "SED - Grade School",
+    "SED - Junior High School",
+    "SED - Senior High School",
+    "SED - Physical Education Department",
+    "SED - Theology Department",
+    "SHAS - College of Nursing and Pharmacy",
+    "SHAS - School of Arts and Sciences",
+    "SOB - College of Accountancy",
+    "SOB - College of Hospitality and Tourism Management",
+    "SOB - School of Business and Public Management",
+    "STS - College of Engineering and Architecture",
+    "STS - College of Information Technology"
+];
+
+const sortCourses = (coursesList) => {
+    return coursesList.sort((a, b) => {
+        const indexA = DEPARTMENT_ORDER.indexOf(a.name);
+        const indexB = DEPARTMENT_ORDER.indexOf(b.name);
+        
+        if (indexA === -1 && indexB === -1) return a.name.localeCompare(b.name);
+        if (indexA === -1) return 1;
+        if (indexB === -1) return -1;
+        
+        return indexA - indexB;
+    });
+};
+
 exports.getAllCourses = async (req, res) => {
     try {
         const courses = await Course.find({}, 'name');
+        const sortedCourses = sortCourses(courses);
         res.json({
             success: true,
-            courses
+            courses: sortedCourses
         });
     } catch (error) {
         console.error('Get courses error:', error);
@@ -112,14 +160,16 @@ exports.getAllCourses = async (req, res) => {
 exports.getFullCourses = async (req, res) => {
     try {
         const courses = await Course.find({}, 'name encryption_key created_at');
+        const formatted = courses.map(c => ({
+            id: c._id,
+            name: c.name,
+            encryptionKey: c.encryption_key,
+            createdAt: c.created_at
+        }));
+        const sortedCourses = sortCourses(formatted);
         res.json({
             success: true,
-            courses: courses.map(c => ({
-                id: c._id,
-                name: c.name,
-                encryptionKey: c.encryption_key,
-                createdAt: c.created_at
-            }))
+            courses: sortedCourses
         });
     } catch (error) {
         console.error('Get full courses error:', error);

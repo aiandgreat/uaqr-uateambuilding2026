@@ -96,6 +96,18 @@ a:hover {
     border-right: 1.5px solid rgba(196, 30, 58, 0.18);
 }
 
+/* UAQR logo — beside Powered By */
+.nav-logo--uaqr {
+    height: 45px;
+    width: auto;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.nav-logo--uaqr:hover {
+    transform: scale(1.05);
+}
+
 /* CIT logo — larger */
 .nav-logo--cit {
     height: 90px;

@@ -58,7 +58,7 @@ exports.generateQR = async (req, res) => {
         }
         
         if (student.course_id.name !== courseName) {
-            return errorResponse(res, 403, 'Student does not belong to this course');
+            return errorResponse(res, 403, 'Faculty/Employee does not belong to this Cluster');
         }
         
         const studentData = {
@@ -75,7 +75,8 @@ exports.generateQR = async (req, res) => {
         
         res.json({
             success: true,
-            encryptedData: encrypted
+            encryptedData: encrypted,
+            name: student.name
         });
     } catch (error) {
         console.error('QR generation error:', error);

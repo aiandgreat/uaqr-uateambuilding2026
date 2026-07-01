@@ -733,7 +733,11 @@ async function verifyQRCode(encryptedData) {
         
         if (!response.ok) {
             console.log(data);
-            throw new Error(data.error || 'Verification failed');
+            let errMsg = data.error || 'Verification failed';
+            if (errMsg === 'Student does not belong to this course') {
+                errMsg = 'Faculty/Employee does not belong to this Cluster';
+            }
+            throw new Error(errMsg);
         }
 
         const resultDiv = document.getElementById('verificationMessage');

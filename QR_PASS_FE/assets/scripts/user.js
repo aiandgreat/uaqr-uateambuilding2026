@@ -60,13 +60,10 @@ document.getElementById('registerBtn').addEventListener('click', () => {
     const name = document.getElementById('studentName').value.trim();
     const course = document.getElementById('registerCourse').value;
 
-    if (countRegistrationCookies() >= 1) {
-        showRegistrationLimitModal();
-        return;
-    }
 
-    if (studentId.length !== 10) {
-        alertPopup('UA ID must be exactly 10 characters long');
+
+    if (studentId.length < 6 || studentId.length > 10) {
+        alertPopup('UA ID must be between 6 and 10 characters long');
         return;
     }
 
@@ -95,7 +92,7 @@ function hideVerificationModal() {
     verificationModal.style.display = 'none';
 }
 
-closeModalBtn.addEventListener('click', hideVerificationModal);
+closeModalBtn?.addEventListener('click', hideVerificationModal);
 cancelVerifyBtn.addEventListener('click', hideVerificationModal);
 confirmVerifyBtn.addEventListener('click', () => {
     const verifiedStudentId = verifyStudentIdInput.value.trim();
@@ -124,8 +121,6 @@ async function proceedWithRegistration() {
         
         const data = await response.json();
         if (response.ok) {
-            const cookieName = 'dlmLqN+l84dx3G759VPBKxBmtWShFJJLmCSffBbSQ14=' + Date.now();
-            setCookie(cookieName, '1', 999); 
             alertPopup('Registration successful! You may now generate your pass.');
             
             // Clear inputs and switch to Generate tab
@@ -149,8 +144,8 @@ async function generateStudentQR() {
     const studentId = document.getElementById('qrStudentId').value.trim();
     const course = document.getElementById('qrCourse').value;
     
-    if (studentId.length !== 10) {
-        alertPopup('UA ID must be exactly 10 characters long');
+    if (studentId.length < 6 || studentId.length > 10) {
+        alertPopup('UA ID must be between 6 and 10 characters long');
         return;
     }
 
@@ -175,7 +170,7 @@ async function generateStudentQR() {
         if (response.ok) {
             const canvas = document.getElementById('qrCodeCanvas');
             canvas.dataset.studentId = studentId;
-            canvas.dataset.studentName = data.studentName || 'Faculty';
+            canvas.dataset.studentName = data.name || 'Faculty/Employee';
             
             const ctx = canvas.getContext('2d');
             canvas.width = 400;
@@ -221,7 +216,7 @@ async function generateStudentQR() {
             const footerY = 480;
             ctx.fillStyle = '#1A3A6E';
             ctx.font = 'bold 18px "Open Sans", sans-serif';
-            ctx.fillText((data.studentName || 'Faculty').toUpperCase(), canvas.width/2, footerY);
+            ctx.fillText((data.name || 'Faculty/Employee').toUpperCase(), canvas.width/2, footerY);
             ctx.font = '14px "Open Sans", sans-serif';
             ctx.fillStyle = '#555555';
             ctx.fillText(studentId, canvas.width/2, footerY + 25);
@@ -241,7 +236,11 @@ async function generateStudentQR() {
 
             document.getElementById('qrCodeContainer').classList.remove('hidden');
         } else {
-            alertPopup(data.error || 'Failed to generate QR code');
+            let errMsg = data.error || 'Failed to generate QR code';
+            if (errMsg === 'Student does not belong to this course') {
+                errMsg = 'Faculty/Employee does not belong to this Cluster';
+            }
+            alertPopup(errMsg);
         }
     } catch (error) {
         alertPopup('Server error while generating QR.');
@@ -255,9 +254,9 @@ async function generateStudentQR() {
 function downloadQRCode() {
     const canvas = document.getElementById('qrCodeCanvas');
     const studentId = canvas.dataset.studentId || '';
-    const name = canvas.dataset.studentName || 'Student';
+    const name = canvas.dataset.studentName || 'Faculty_Employee';
     
-    let filename = `Techkada_Pass_2026_${studentId}_${name.replace(/\s+/g, '_')}.png`;
+    let filename = `UATEAMBUILDING2026_PASS_${studentId}_${name.replace(/\s+/g, '_')}.png`;
 
     const link = document.createElement('a');
     link.download = filename;

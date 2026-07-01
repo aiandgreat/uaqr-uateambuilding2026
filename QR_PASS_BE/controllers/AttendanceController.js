@@ -54,7 +54,7 @@ exports.verifyQR = async (req, res) => {
         }
 
         if (student.course_id.name !== courseName) {
-            return errorResponse(res, 403, 'Student does not belong to this course');
+            return errorResponse(res, 403, 'Faculty/Employee does not belong to this Cluster');
         }
 
         const latestAttendance = await Attendance.findOne({
@@ -275,8 +275,8 @@ exports.generateAttendancePDF = async (req, res) => {
         const doc = new PDFDocument({ margin: 30, size: 'A4', layout: 'landscape', bufferPages: true });
         res.setHeader('Content-Type', 'application/pdf');
         
-        let filename = 'Research_Forum_Attendance';
-        if (date) filename += `_${date.replace(/-/g, '')}`;
+        const reportDate = date ? date.replace(/-/g, '') : new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        let filename = `ATTENDANCE_RECORDS_UATB2026_${reportDate}`;
         if (course) filename += `_${course.replace(/\s+/g, '_')}`;
         res.setHeader('Content-Disposition', `attachment; filename="${filename}.pdf"`);
         
@@ -286,10 +286,10 @@ exports.generateAttendancePDF = async (req, res) => {
         doc.fillColor('#072758') // Deep Blue
            .fontSize(20)
            .font('Helvetica-Bold')
-           .text('CREARE ET INNOVARE 2026', { align: 'center' });
+           .text('UA TEAM BUILDING 2026', { align: 'center' });
            
         doc.fontSize(14)
-           .text('The Research Forum Attendance Records', { align: 'center' });
+           .text('Attendance Records', { align: 'center' });
         
         doc.moveDown(1);
 
