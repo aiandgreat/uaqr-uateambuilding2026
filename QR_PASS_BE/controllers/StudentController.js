@@ -18,7 +18,7 @@ exports.registerStudent = async (req, res) => {
         
         const existingStudent = await Student.findOne({ student_id: studentId });
         if (existingStudent) {
-            return errorResponse(res, 409, 'Student already registered');
+            return errorResponse(res, 409, 'Employee already registered');
         }
         
         const student = new Student({
