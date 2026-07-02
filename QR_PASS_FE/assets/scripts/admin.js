@@ -308,7 +308,7 @@ function showEditCourseModal(e) {
             currentEditingCourseId = courseId;
             document.getElementById('editCourseName').value = courseName;
             document.getElementById('editCourseKey').value = courseKey;
-            document.getElementById('editCourseStatus').classList.add('hidden');
+            document.getElementById('courseStatus').classList.add('hidden');
             
             const modal = document.getElementById('editCourseModal');
             document.body.classList.add("modal-open");
@@ -413,7 +413,7 @@ function showDeleteCourseModal(e) {
             currentDeletingCourseName = courseName;
             const message = document.getElementById('deleteCourseMessage');
             message.textContent = `Are you sure you want to delete the department "${courseName}"?`;
-            document.getElementById('deleteCourseStatus').classList.add('hidden');
+            document.getElementById('courseStatus').classList.add('hidden');
             
             const modal = document.getElementById('deleteCourseModal');
             document.body.classList.add("modal-open");
